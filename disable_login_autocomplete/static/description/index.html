@@ -1,0 +1,111 @@
+<section style="max-width:900px;margin:auto;font-family:Arial,Helvetica,sans-serif;line-height:1.6">
+
+<!-- Banner -->
+<div style="text-align:center;margin-bottom:30px;">
+    <img src="banner.png" style="width:100%;border-radius:8px;">
+</div>
+
+<h1 style="text-align:center;color:#875A7B;">
+Disable Login Autocomplete
+</h1>
+
+<p style="text-align:center;font-size:18px;">
+Enhance the security of your Odoo login page by preventing browsers from saving or auto-filling credentials.
+</p>
+
+<hr>
+
+<h2>&#128274; Why This Module?</h2>
+
+<p>
+Modern browsers automatically store login credentials and suggest them during login.
+While convenient, this behavior can be risky in environments where multiple users share the same computer.
+</p>
+
+<ul>
+<li>Shared office computers</li>
+<li>Public workstations</li>
+<li>Call center environments</li>
+<li>Devices used by multiple employees</li>
+</ul>
+
+<p>
+This module disables browser autocomplete and password autofill on the Odoo login form,
+reducing the risk of credential exposure.
+</p>
+
+<hr>
+
+<h2>&#10024; Key Features</h2>
+
+<ul>
+<li>Disable browser password autofill</li>
+<li>Disable username autocomplete</li>
+<li>Prevent credential storage in browser</li>
+<li>Lightweight and secure implementation</li>
+<li>No impact on Odoo authentication logic</li>
+<li>Compatible with Odoo 18</li>
+</ul>
+
+<hr>
+
+<h2>&#9881;&#65039; How It Works</h2>
+
+<p>
+The module extends the default login template and adds security attributes to input fields.
+</p>
+
+<pre>
+autocomplete="off"
+autocomplete="new-password"
+</pre>
+
+<p>
+These attributes instruct modern browsers not to store or suggest saved credentials.
+</p>
+
+<hr>
+
+<h2>&#128247; Screenshots</h2>
+
+<div style="text-align:center;margin-top:20px;">
+
+<h3>Login Page Protection</h3>
+<img src="screenshot1.png" style="width:100%;border-radius:6px;margin-bottom:20px;"/>
+
+<h3>Autocomplete Disabled</h3>
+<img src="screenshot2.png" style="width:100%;border-radius:6px;"/>
+
+</div>
+
+<hr>
+
+<h2>&#128230; Installation</h2>
+
+<ol>
+<li>Download the module</li>
+<li>Place it inside your Odoo <code>addons</code> directory</li>
+<li>Update Apps List</li>
+<li>Search for <b>Disable Login Autocomplete</b></li>
+<li>Click Install</li>
+</ol>
+
+<hr>
+
+<h2>&#128104;&#8205;&#128187; Author</h2>
+
+<p>
+<b>Deepak Verma</b><br>
+Company: <b>Deecoders</b><br>
+Email: dpakverma789@gmail.com
+</p>
+
+<hr>
+
+<h2>&#128220; License</h2>
+
+<p>
+LGPL-3
+</p>
+
+</section>

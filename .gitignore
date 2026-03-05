@@ -1,0 +1,4 @@
+.idea
+.venv
+odoo-developer.conf
+login_attempt_security
