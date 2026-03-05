@@ -40,7 +40,7 @@ Email: dpakverma789@gmail.com
     "license": "LGPL-3",
     "author": "Deepak Verma",
     "maintainer": "Deepak Verma",
-    "website": "https://github.com/dpakverma789/odoo_store_apps",
+    "website": "https://www.linkedin.com/in/deepak-verma-07144012a",
 
     "depends": ["web"],
 
