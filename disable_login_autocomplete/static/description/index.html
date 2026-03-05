@@ -1,111 +1,135 @@
 <section style="max-width:900px;margin:auto;font-family:Arial,Helvetica,sans-serif;line-height:1.6">
 
-<!-- Banner -->
-<div style="text-align:center;margin-bottom:30px;">
-    <img src="banner.png" style="width:100%;border-radius:8px;">
-</div>
+    <!-- Banner -->
+    <div style="text-align:center;margin-bottom:30px;">
+        <img src="banner.png" style="width:100%;border-radius:8px;">
+    </div>
 
-<h1 style="text-align:center;color:#875A7B;">
-Disable Login Autocomplete
-</h1>
+    <h1 style="text-align:center;color:#875A7B;">
+        Disable Login Autocomplete
+    </h1>
 
-<p style="text-align:center;font-size:18px;">
-Enhance the security of your Odoo login page by preventing browsers from saving or auto-filling credentials.
-</p>
+    <p style="text-align:center;font-size:18px;">
+        Improve login page security by disabling browser autofill, password paste,
+        and right-click actions on the Odoo login screen.
+    </p>
 
-<hr>
+    <hr>
 
-<h2>&#128274; Why This Module?</h2>
+    <h2>&#128274; Module Overview</h2>
 
-<p>
-Modern browsers automatically store login credentials and suggest them during login.
-While convenient, this behavior can be risky in environments where multiple users share the same computer.
-</p>
+    <p>
+        This module enhances the security of the Odoo login page by preventing browsers
+        and users from performing actions that may expose credentials.
+    </p>
 
-<ul>
-<li>Shared office computers</li>
-<li>Public workstations</li>
-<li>Call center environments</li>
-<li>Devices used by multiple employees</li>
-</ul>
+    <p>
+        The module modifies the login form behavior using a combination of XML view
+        inheritance and frontend JavaScript.
+    </p>
 
-<p>
-This module disables browser autocomplete and password autofill on the Odoo login form,
-reducing the risk of credential exposure.
-</p>
+    <ul>
+        <li>Disable browser autofill for login credentials</li>
+        <li>Prevent password pasting in the password field</li>
+        <li>Disable right-click on the login page</li>
+    </ul>
 
-<hr>
+    <p>
+        These protections help reduce risks when Odoo is accessed from shared computers,
+        public systems, or environments where credential safety is important.
+    </p>
 
-<h2>&#10024; Key Features</h2>
+    <hr>
 
-<ul>
-<li>Disable browser password autofill</li>
-<li>Disable username autocomplete</li>
-<li>Prevent credential storage in browser</li>
-<li>Lightweight and secure implementation</li>
-<li>No impact on Odoo authentication logic</li>
-<li>Compatible with Odoo 18</li>
-</ul>
+    <h2>&#9881;&#65039; How It Works</h2>
 
-<hr>
+    <p>
+        The module inherits the default login template and adjusts the behavior of
+        login fields.
+    </p>
 
-<h2>&#9881;&#65039; How It Works</h2>
+    <h4>&#128274; Disable Browser Autofill</h4>
 
-<p>
-The module extends the default login template and adds security attributes to input fields.
-</p>
+    <p>
+        The module updates login and password input fields to prevent browsers from
+        automatically filling stored credentials.
+    </p>
 
-<pre>
+    <pre>
 autocomplete="off"
 autocomplete="new-password"
 </pre>
 
-<p>
-These attributes instruct modern browsers not to store or suggest saved credentials.
-</p>
+    <p>
+        This reduces the chance of credentials being auto-filled by browser password
+        managers.
+    </p>
 
-<hr>
+    <h4>&#128274; Disable Password Paste</h4>
 
-<h2>&#128247; Screenshots</h2>
+    <p>
+        JavaScript prevents users from pasting content into the password field.
+    </p>
 
-<div style="text-align:center;margin-top:20px;">
+    <p>
+        This encourages manual password entry and prevents automated credential
+        injection.
+    </p>
 
-<h3>Login Page Protection</h3>
-<img src="screenshot1.png" style="width:100%;border-radius:6px;margin-bottom:20px;"/>
+    <h4>&#128274; Disable Right Click on Login Page</h4>
 
-<h3>Autocomplete Disabled</h3>
-<img src="screenshot2.png" style="width:100%;border-radius:6px;"/>
+    <p>
+        Right-click actions are disabled on the login page to restrict context menu
+        operations such as copying or inspecting input fields.
+    </p>
 
-</div>
+    <p>
+        This restriction only applies to the login page and does not affect the rest
+        of the system after login.
+    </p>
 
-<hr>
+    <hr>
 
-<h2>&#128230; Installation</h2>
+    <h2>&#128247; Screenshots</h2>
 
-<ol>
-<li>Download the module</li>
-<li>Place it inside your Odoo <code>addons</code> directory</li>
-<li>Update Apps List</li>
-<li>Search for <b>Disable Login Autocomplete</b></li>
-<li>Click Install</li>
-</ol>
+    <div style="text-align:center;margin-top:20px;">
 
-<hr>
+        <h3>Login Page Security Behavior</h3>
+        <img src="screenshot1.png" style="width:100%;border-radius:6px;margin-bottom:20px;">
 
-<h2>&#128104;&#8205;&#128187; Author</h2>
+        <h3>Autocomplete and Paste Restrictions</h3>
+        <img src="screenshot2.png" style="width:100%;border-radius:6px;">
 
-<p>
-<b>Deepak Verma</b><br>
-Company: <b>Deecoders</b><br>
-Email: dpakverma789@gmail.com
-</p>
+    </div>
 
-<hr>
+    <hr>
 
-<h2>&#128220; License</h2>
+    <h2>&#128230; Installation</h2>
 
-<p>
-LGPL-3
-</p>
+    <ol>
+        <li>Download the module</li>
+        <li>Place the module inside your Odoo <code>addons</code> directory</li>
+        <li>Update the Apps list</li>
+        <li>Search for <b>Disable Login Autocomplete</b></li>
+        <li>Click Install</li>
+    </ol>
+
+    <hr>
+
+    <h2>&#128100; Author</h2>
+
+    <p>
+        <b>Deepak Verma</b><br>
+        Company: <b>Deecoders</b><br>
+        Email: dpakverma789@gmail.com
+    </p>
+
+    <hr>
+
+    <h2>&#128220; License</h2>
+
+    <p>
+        LGPL-3
+    </p>
 
 </section>

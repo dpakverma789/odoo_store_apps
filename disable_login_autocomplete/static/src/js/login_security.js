@@ -14,13 +14,12 @@ function applyLoginSecurity() {
     */
     passwordInput.addEventListener("paste", function (e) {
         e.preventDefault();
-        alert("Paste disabled for security");
     });
 
     /*
-    Disable right click on login page
+    Disable right click on entire login page
     */
-    loginForm.addEventListener("contextmenu", function (e) {
+    document.addEventListener("contextmenu", function (e) {
         e.preventDefault();
     });
 
@@ -28,7 +27,7 @@ function applyLoginSecurity() {
 }
 
 /*
-Wait until OWL renders login form
+Wait until Odoo OWL renders login page
 */
 const interval = setInterval(() => {
     if (applyLoginSecurity()) {

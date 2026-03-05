@@ -16,8 +16,11 @@
 
         <!-- Security message under password -->
         <xpath expr="//input[@name='password']" position="after">
-            <div class="text-muted small mt-1" style="font-size:12px;">
-                🔒 Paste disabled for security
+            <div class="text-danger small mt-1" style="font-size:12px;">
+                &#128274; Paste disabled for security
+            </div>
+            <div class="text-danger small mt-1" style="font-size:12px;">
+                &#128274; Right Click disabled for security
             </div>
         </xpath>
 
