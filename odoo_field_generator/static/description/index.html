@@ -1,256 +1,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-
-    <title>Odoo Field Syntax Generator</title>
-
-    <style>
-
-        body{
-            font-family: Arial, Helvetica, sans-serif;
-            margin:0;
-            padding:0;
-            background:#f6f6f6;
-        }
-
-        .container{
-            max-width:1000px;
-            margin:auto;
-            background:white;
-            padding:30px;
-        }
-
-        .banner img{
-            width:100%;
-            border-radius:8px;
-        }
-
-        .header{
-            display:flex;
-            align-items:center;
-            margin-top:25px;
-        }
-
-        .header img{
-            width:80px;
-            margin-right:20px;
-        }
-
-        .title{
-            font-size:32px;
-            font-weight:bold;
-        }
-
-        .subtitle{
-            color:#666;
-        }
-
-        .section{
-            margin-top:40px;
-        }
-
-        .section h2{
-            color:#7c4dff;
-        }
-
-        .feature{
-            background:#fafafa;
-            padding:15px;
-            margin:10px 0;
-            border-radius:6px;
-        }
-
-        .code-box{
-            background:#272822;
-            color:#f8f8f2;
-            padding:20px;
-            border-radius:6px;
-            font-family:monospace;
-            overflow:auto;
-        }
-
-        .screenshot img{
-            width:100%;
-            margin-top:15px;
-            border-radius:6px;
-            border:1px solid #ddd;
-        }
-
-        .footer{
-            margin-top:40px;
-            padding-top:20px;
-            border-top:1px solid #eee;
-            color:#777;
-        }
-
-    </style>
+<meta charset="UTF-8">
+<title>Odoo Field Syntax Generator</title>
 </head>
 
-<body>
+<body style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:auto;">
 
-<div class="container">
-
-    <!-- Banner -->
-
-    <div class="banner">
-        <img src="banner.png"/>
-    </div>
-
-
-    <!-- Header -->
-
-    <div class="header">
-
-        <img src="icon.png"/>
-
-        <div>
-            <div class="title">Odoo Field Syntax Generator</div>
-            <div class="subtitle">
-                Generate Python and XML field syntax instantly for faster Odoo development
-            </div>
-        </div>
-
-    </div>
-
-
-    <!-- Description -->
-
-    <div class="section">
-
-        <h2>&#x1F680; Overview</h2>
-
-        <p>
-            The <b>Odoo Field Syntax Generator</b> helps developers quickly generate
-            Odoo Python field definitions and XML view syntax from a simple variable list.
-        </p>
-
-        <p>
-            Instead of writing repetitive boilerplate code, simply enter variables like:
-        </p>
-
-        <div class="code-box">
-
-            name.c
-            age.i
-            salary.f
-            date_of_birth.d
-
-        </div>
-
-        <p>
-            The module instantly generates ready-to-copy Python and XML code.
-        </p>
-
-    </div>
-
-
-    <!-- Features -->
-
-    <div class="section">
-
-        <h2>&#x2728; Features</h2>
-
-        <div class="feature">
-            &#x2705; Generate Python <b>fields syntax</b> automatically
-        </div>
-
-        <div class="feature">
-            &#x2705; Generate XML <b>form/list field tags</b>
-        </div>
-
-        <div class="feature">
-            &#x2705; Supports most Odoo field types
-        </div>
-
-        <div class="feature">
-            &#x2705; Reduces repetitive coding time
-        </div>
-
-        <div class="feature">
-            &#x2705; Developer productivity tool
-        </div>
-
-    </div>
-
-
-    <!-- Supported Fields -->
-
-    <div class="section">
-
-        <h2>&#x1F4CB; Supported Field Types</h2>
-
-        <div class="code-box">
-
-            c → Char
-            i → Integer
-            f → Float
-            d → Date
-            dt → Datetime
-            bi → Binary
-            s → Selection
-            b → Boolean
-            mo → Many2one
-            om → One2many
-            mm → Many2many
-
-        </div>
-
-    </div>
-
-
-    <!-- Screenshots -->
-
-    <div class="section">
-
-        <h2>&#x1F5BC; Screenshots</h2>
-
-        <div class="screenshot">
-            <img src="Screenshot1.jpeg"/>
-        </div>
-
-        <div class="screenshot">
-            <img src="Screenshot2.jpeg"/>
-        </div>
-
-    </div>
-
-
-    <!-- Example -->
-
-    <div class="section">
-
-        <h2>&#x1F4DD; Example</h2>
-
-        <div class="code-box">
-
-            Input:
-
-            name.c
-            age.i
-            salary.f
-
-            Output:
-
-            name = fields.Char(string="Name")
-            age = fields.Integer(string="Age")
-            salary = fields.Float(string="Salary")
-
-        </div>
-
-    </div>
-
-
-    <!-- Footer -->
-
-    <div class="footer">
-
-        &#x1F6E0; Built for Odoo developers to accelerate module development.
-
-    </div>
-
-
+<!-- Banner -->
+<div style="text-align:center;">
+<img src="banner.png" style="width:100%; max-width:900px;">
 </div>
+
+<br>
+
+<!-- Header -->
+<div style="display:flex; align-items:center; gap:20px;">
+<img src="icon.png" style="width:80px;">
+<div>
+<h1 style="margin:0;">🚀 Odoo Field Syntax Generator</h1>
+<p style="color:#666; margin-top:5px;">
+Generate Python and XML field syntax instantly for faster Odoo development
+</p>
+</div>
+</div>
+
+<hr>
+
+<!-- Overview -->
+<h2>🚀 Overview</h2>
+
+<p>
+<b>Odoo Field Syntax Generator</b> helps developers quickly generate
+Odoo Python field definitions and XML field tags using a simple variable notation.
+</p>
+
+<p>Example variable list:</p>
+
+<pre style="background:#f4f4f4;padding:15px;border-radius:5px;">
+name.c
+age.i
+salary.f
+date_of_birth.d
+</pre>
+
+<p>
+The module instantly generates ready-to-copy Python and XML syntax.
+</p>
+
+<hr>
+
+<!-- Features -->
+<h2>✨ Features</h2>
+
+<ul>
+<li>✔ Generate Python field syntax automatically</li>
+<li>✔ Generate XML view field tags</li>
+<li>✔ Supports most Odoo field types</li>
+<li>✔ Saves development time</li>
+<li>✔ Lightweight developer tool</li>
+</ul>
+
+<hr>
+
+<!-- Supported Fields -->
+<h2>📋 Supported Field Types</h2>
+
+<pre style="background:#f4f4f4;padding:15px;border-radius:5px;">
+c   → Char
+i   → Integer
+f   → Float
+d   → Date
+dt  → Datetime
+bi  → Binary
+s   → Selection
+b   → Boolean
+mo  → Many2one
+om  → One2many
+mm  → Many2many
+</pre>
+
+<hr>
+
+<!-- Screenshots -->
+<h2>🖼 Screenshots</h2>
+
+<p>
+<img src="screenshot1.png" style="width:100%;">
+</p>
+
+<p>
+<img src="screenshot2.png" style="width:100%;">
+</p>
+
+<hr>
+
+<!-- Example -->
+<h2>📝 Example</h2>
+
+<pre style="background:#f4f4f4;padding:15px;border-radius:5px;">
+Input
+
+name.c
+age.i
+salary.f
+
+Output
+
+name = fields.Char(string="Name")
+age = fields.Integer(string="Age")
+salary = fields.Float(string="Salary")
+</pre>
+
+<hr>
+
+<p style="color:#777;">
+🛠 Built for Odoo developers to accelerate module development.
+</p>
 
 </body>
 </html>
