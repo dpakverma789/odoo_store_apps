@@ -1,0 +1,12 @@
+/* Hide technical details link */
+a.btn-link {
+    display: none !important;
+}
+
+/* Hide traceback block */
+.modal-body pre,
+.modal-body code,
+.o_error_detail,
+.o_error_debug {
+    display: none !important;
+}
