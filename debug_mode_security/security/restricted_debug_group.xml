@@ -12,7 +12,7 @@
     <record id="group_enable_debug" model="res.groups">
         <field name="name">Allow Debug Mode</field>
         <field name="category_id"
-               ref="restrict_debug_mode.module_category_debug_security"/>
+               ref="debug_mode_security.module_category_debug_security"/>
         <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
     </record>
 

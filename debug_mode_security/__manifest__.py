@@ -1,10 +1,10 @@
 {
-    "name": "Restrict Debug Mode",
+    "name": "Debug Mode Security",
     "version": "18.0.1.0.0",
     "category": "Administration",
     "summary": "Control access to Odoo Developer Mode",
     "description": """
-Restrict Debug Mode
+Debug Mode Security
 
 This module allows administrators to control which users can
 enable or disable Odoo Developer Mode.

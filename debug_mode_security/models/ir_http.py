@@ -26,7 +26,7 @@ class IrHttp(models.AbstractModel):
                 if uid:
                     user = request.env["res.users"].sudo().browse(uid)
                     if user and user.exists():
-                        allowed = user.has_group("restrict_debug_mode.group_enable_debug")
+                        allowed = user.has_group("debug_mode_security.group_enable_debug")
                 if not allowed:
                     request.session.debug = ""
                     return
