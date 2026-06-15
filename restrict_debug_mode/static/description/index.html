@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restrict Debug Mode</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        body {
+            font-family: Inter, Segoe UI, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.7;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #64748b;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .hero {
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .05);
+        }
+
+        .badge-custom {
+            background: #ede9fe;
+            color: #6d28d9;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .feature-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 35px;
+            height: 100%;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .04);
+            transition: .3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f0ff;
+            border-radius: 18px;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .screenshot-block {
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .06);
+            margin-bottom: 60px;
+        }
+
+        .screenshot-block img {
+            width: 100%;
+            display: block;
+            transition: .4s;
+        }
+
+        .screenshot-block:hover img {
+            transform: scale(1.01);
+        }
+
+        .screenshot-content {
+            padding: 35px;
+        }
+
+        .screenshot-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #6c4cf1;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .benefit-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px 25px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            font-weight: 500;
+        }
+
+        .support-box {
+            background: linear-gradient(135deg, #6c4cf1, #8b6eff);
+            color: white;
+            padding: 60px;
+            border-radius: 24px;
+        }
+
+        .support-box a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .highlight {
+            color: #6c4cf1;
+        }
+
+        @media (max-width: 768px) {
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .support-box {
+                padding: 35px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container py-5">
+
+    <!-- HERO -->
+
+    <section class="hero mb-5">
+
+        <img src="banner.png"
+             class="img-fluid w-100"
+             alt="Restrict Debug Mode Banner">
+
+        <div class="p-5">
+
+            <span class="badge-custom">Odoo 18</span>
+            <span class="badge-custom">Enterprise Ready</span>
+            <span class="badge-custom">Security Focused</span>
+
+            <h1 class="display-4 fw-bold mt-4">
+                Restrict Debug Mode
+            </h1>
+
+            <p class="lead text-secondary mt-3">
+                Control who can enable or disable Odoo Developer Mode
+                using a dedicated security group. Protect technical
+                features and reduce unauthorized access to developer tools.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- FEATURES -->
+
+    <section class="mb-5">
+
+        <div class="text-center mb-5">
+
+            <h2 class="section-title">
+                Why Use Restrict Debug Mode?
+            </h2>
+
+            <p class="section-subtitle">
+                Prevent unauthorized users from accessing Developer Mode,
+                technical menus, and advanced debugging tools.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🔐
+                    </div>
+
+                    <h4 class="fw-bold">
+                        Permission Based
+                    </h4>
+
+                    <p class="text-secondary mb-0">
+                        Allow only selected users to access
+                        Odoo Developer Mode.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🛡️
+                    </div>
+
+                    <h4 class="fw-bold">
+                        Enhanced Security
+                    </h4>
+
+                    <p class="text-secondary mb-0">
+                        Prevent accidental or unauthorized
+                        access to technical configurations.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        ⚙️
+                    </div>
+
+                    <h4 class="fw-bold">
+                        Enterprise Ready
+                    </h4>
+
+                    <p class="text-secondary mb-0">
+                        Lightweight implementation fully
+                        compatible with Odoo 18.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SCREENSHOTS -->
+
+    <section class="mb-5">
+
+        <div class="text-center mb-5">
+
+            <h2 class="section-title">
+                Module Screenshots
+            </h2>
+
+            <p class="section-subtitle">
+                A quick overview of how Restrict Debug Mode works.
+            </p>
+
+        </div>
+
+        <!-- Screenshot 1 -->
+
+        <div class="screenshot-block">
+
+            <img src="screenshot1.png"
+                 alt="Allow Debug Mode Permission">
+
+            <div class="screenshot-content">
+
+                <div class="screenshot-number">
+                    1
+                </div>
+
+                <h2 class="fw-bold">
+                    Allow Debug Mode Permission
+                </h2>
+
+                <p class="text-secondary fs-5">
+                    Grant Developer Mode access only to selected users
+                    through the dedicated <strong>Allow Debug Mode</strong>
+                    security group.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Screenshot 2 -->
+
+        <div class="screenshot-block">
+
+            <img src="screenshot2.png"
+                 alt="Debug Access Granted">
+
+            <div class="screenshot-content">
+
+                <div class="screenshot-number">
+                    2
+                </div>
+
+                <h2 class="fw-bold">
+                    Authorized User Access
+                </h2>
+
+                <p class="text-secondary fs-5">
+                    Users with permission can enable or disable
+                    Developer Mode normally and access technical tools.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Screenshot 3 -->
+
+        <div class="screenshot-block">
+
+            <img src="screenshot3.png"
+                 alt="Debug Access Restricted">
+
+            <div class="screenshot-content">
+
+                <div class="screenshot-number">
+                    3
+                </div>
+
+                <h2 class="fw-bold">
+                    Unauthorized Access Blocked
+                </h2>
+
+                <p class="text-secondary fs-5">
+                    Users without permission are restricted from
+                    enabling Developer Mode and accessing debug tools.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- BENEFITS -->
+
+    <section class="mb-5">
+
+        <div class="text-center mb-5">
+
+            <h2 class="section-title">
+                Key Benefits
+            </h2>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-10 mx-auto">
+
+                <div class="benefit-card">
+                    ✓ Restrict access to Developer Mode using security groups.
+                </div>
+
+                <div class="benefit-card">
+                    ✓ Prevent unauthorized debugging and technical changes.
+                </div>
+
+                <div class="benefit-card">
+                    ✓ Improve overall system security and governance.
+                </div>
+
+                <div class="benefit-card">
+                    ✓ Reduce accidental modifications by non-technical users.
+                </div>
+
+                <div class="benefit-card">
+                    ✓ Easy installation and configuration.
+                </div>
+
+                <div class="benefit-card">
+                    ✓ Compatible with Odoo 18 Community & Enterprise.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SUPPORT -->
+
+    <section class="support-box text-center">
+
+        <h2 class="fw-bold mb-3">
+            Need Assistance?
+        </h2>
+
+        <p class="mb-4 fs-5">
+            Contact us for support, customization or implementation services.
+        </p>
+
+        <h4>
+            <a href="mailto:dpakverma789@gmail.com">
+                dpakverma789@gmail.com
+            </a>
+        </h4>
+
+    </section>
+
+    <div class="text-center mt-5 footer">
+        © 2026 <strong>Deecoders</strong> |
+        Restrict Debug Mode for Odoo 18
+    </div>
+
+</div>
+
+</body>
+</html>
+

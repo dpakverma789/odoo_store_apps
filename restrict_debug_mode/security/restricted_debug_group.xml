@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Category visible in User Access Rights -->
+    <record id="module_category_debug_security" model="ir.module.category">
+        <field name="name">Debug Security</field>
+        <field name="description">Developer Mode Access Control</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <!-- Permission Group -->
+    <record id="group_enable_debug" model="res.groups">
+        <field name="name">Allow Debug Mode</field>
+        <field name="category_id"
+               ref="restrict_debug_mode.module_category_debug_security"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+</odoo>
