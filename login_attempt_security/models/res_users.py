@@ -27,7 +27,7 @@ class ResUsers(models.Model):
             if (self.login_blocked_until
                     and self.login_blocked_until > fields.Datetime.now()
             ):
-                raise AccessDenied("Account temporarily locked.")
+                raise AccessDenied(f"Account temporarily locked for {block_minutes} min")
             else:
                 self.reset_login_attempts()
 
