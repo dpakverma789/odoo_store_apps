@@ -1,12 +1,28 @@
-/* Hide technical details link */
-a.btn-link {
+
+/* Hide traceback section */
+.o_error_dialog .o_error_detail,
+.o_error_dialog .o_error_debug,
+.o_error_dialog pre,
+.o_error_dialog code {
     display: none !important;
 }
 
-/* Hide traceback block */
-.modal-body pre,
-.modal-body code,
-.o_error_detail,
-.o_error_debug {
+/* Hide "See technical details" button */
+.o_error_dialog .btn-link {
     display: none !important;
+}
+
+/* Remove extra spacing left after hiding traceback */
+.o_error_dialog .modal-body {
+    min-height: auto !important;
+}
+
+/* Make dialog content compact */
+.o_error_dialog p {
+    margin-bottom: 0.75rem;
+}
+
+/* Optional: keep dialog width reasonable */
+.o_error_dialog {
+    max-width: 700px;
 }
