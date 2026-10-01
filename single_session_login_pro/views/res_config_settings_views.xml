@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="settings_view" model="ir.ui.view">
+        <field name="name">res.config.settings.single.session.pro</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app string="Session Control" name="single_session_login_pro" groups="base.group_system">
+                    <block title="Concurrent Login Policy">
+                        <setting string="Login Conflict Policy" help="Choose what happens when a protected user signs in while another active session already exists.">
+                            <field name="session_conflict_policy" widget="radio"/>
+                        </setting>
+                    </block>
+                    <block title="Session Expiration">
+                        <setting string="Enable Idle Auto-Logout">
+                            <field name="session_idle_enabled"/>
+                            <div class="content-group" invisible="not session_idle_enabled">
+                                <div class="mt16"><label for="session_idle_minutes"/>
+                                    <field name="session_idle_minutes" class="oe_inline"/> minutes</div>
+                                <div class="mt16"><label for="session_warning_minutes"/>
+                                    <field name="session_warning_minutes" class="oe_inline"/> minutes</div>
+                            </div>
+                        </setting>
+                    </block>
+                    <block title="Session History">
+                        <setting string="History Retention" help="Ended session records older than this period will be automatically removed. Use 0 to keep history indefinitely.">
+                            <field name="session_retention_days" class="oe_inline"/> days
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+    <record id="action_settings" model="ir.actions.act_window">
+        <field name="name">Session Control Configuration</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'module': 'single_session_login_pro'}</field>
+    </record>
+    <menuitem id="menu_configuration" name="Configuration" parent="menu_session_control" action="action_settings" sequence="30" groups="base.group_system"/>
+</odoo>

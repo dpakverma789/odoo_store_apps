@@ -8,7 +8,8 @@ class ResUsers(models.Model):
     _inherit = "res.users"
 
     allow_multiple_sessions = fields.Boolean(
-        string="Allow Multiple Sessions", default=False, groups="base.group_system"
+        string="Allow Multiple Sessions", default=False, groups="base.group_system",
+        help="When enabled, this user is exempt from single-session restrictions.",
     )
     session_uuid = fields.Char(
         string="Session UUID", copy=False, groups="base.group_system"
@@ -23,9 +24,28 @@ class ResUsers(models.Model):
             new_uuid = str(uuid.uuid4())
             request.session["single_session_uuid"] = new_uuid
             request.session.pop("single_session_pending_uid", None)
-            if auth_info.get("mfa") != "skip" and user._mfa_url():
-                # Password validation alone is not a completed MFA login.
-                request.session["single_session_pending_uid"] = uid
-            elif not user.allow_multiple_sessions:
-                user.session_uuid = new_uuid
+            user._single_session_prepare_login(auth_info, new_uuid)
         return auth_info
+
+    def _single_session_prepare_login(self, auth_info, session_uuid):
+        self.ensure_one()
+        if auth_info.get("mfa") != "skip" and self._mfa_url():
+            # Password validation alone is not a completed MFA login.
+            request.session["single_session_pending_uid"] = self.id
+        else:
+            self._single_session_complete_login(session_uuid)
+
+    def _single_session_complete_login(self, session_uuid):
+        self.ensure_one()
+        if not self.allow_multiple_sessions:
+            self.session_uuid = session_uuid
+
+    def _single_session_validate(self):
+        self.ensure_one()
+        session_uuid = request.session.get("single_session_uuid")
+        pending_uid = request.session.pop("single_session_pending_uid", None)
+        if pending_uid == self.id and session_uuid:
+            self._single_session_complete_login(session_uuid)
+        if self.allow_multiple_sessions:
+            return {"logout": False}
+        return {"logout": not session_uuid or self.session_uuid != session_uuid}

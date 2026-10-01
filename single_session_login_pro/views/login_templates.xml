@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="login_reason" inherit_id="web.login" name="Session logout reason">
+        <xpath expr="//form" position="inside">
+            <div t-if="single_session_message" class="alert alert-info mt-3" role="status">
+                <t t-out="single_session_message"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>
