@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -6,311 +6,182 @@
     <title>Single Session Login Pro | Deecoders</title>
 
     <style>
-        * {
+        /* Odoo Module Info safe carousel: pure HTML + CSS, no JS and no href navigation */
+        #dc-shot-1, #dc-shot-2, #dc-shot-3 {
+            position: absolute !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        .dc-shot-viewport {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            border: 1px solid #dce3ed;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 10px 28px rgba(24, 36, 59, .07);
+        }
+
+        .dc-shot-track {
+            display: flex;
+            width: 300%;
+            transition: transform .35s ease;
+            will-change: transform;
+        }
+
+        .dc-shot-panel {
+            flex: 0 0 33.333333%;
+            width: 33.333333%;
+            max-width: 33.333333%;
             box-sizing: border-box;
         }
 
-        .dc-shot-tabs {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 0 0 18px;
+        #dc-shot-1:checked ~ .dc-shot-viewport .dc-shot-track {
+            transform: translateX(0);
         }
 
-        .dc-shot-tabs a {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 9px 14px;
-            border: 1px solid #cbd8e3;
-            border-radius: 999px;
-            background: #fff;
-            color: #086959;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 700;
-            transition: .2s ease;
+        #dc-shot-2:checked ~ .dc-shot-viewport .dc-shot-track {
+            transform: translateX(-33.333333%);
         }
 
-        .dc-shot-tabs a:hover {
-            background: #e9f5f1;
-            border-color: #9ccfc0;
+        #dc-shot-3:checked ~ .dc-shot-viewport .dc-shot-track {
+            transform: translateX(-66.666666%);
         }
 
-        .dc-carousel {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            border: 1px solid #dce3ed;
-            border-radius: 20px;
-            background: #fff;
-            box-shadow: 0 12px 30px rgba(24, 36, 59, .08);
-            scrollbar-width: thin;
-            scrollbar-color: #a8b8ca #edf1f7;
-        }
-
-        .dc-slide {
-            flex: 0 0 100%;
-            min-width: 100%;
-            scroll-snap-align: start;
-            scroll-snap-stop: always;
-            margin: 0;
-            padding: clamp(16px, 3vw, 30px);
-        }
-
-        .dc-shot-frame {
-            background: #f7f9fc;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            overflow: hidden;
-            padding: 10px;
-        }
-
-        .dc-shot-frame img {
-            display: block;
-            width: 100%;
-            height: auto;
-            max-height: 680px;
-            object-fit: contain;
-            border-radius: 10px;
-            background: #fff;
-        }
-
-        .dc-slide-copy {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 18px;
-            flex-wrap: wrap;
-            margin-top: 18px;
-        }
-
-        .dc-slide-copy h3 {
-            margin: 0 0 5px;
-            font-size: 19px;
-            line-height: 1.3;
-            color: #18243b;
-        }
-
-        .dc-slide-copy p {
-            margin: 0;
-            max-width: 760px;
-            color: #637087;
-            font-size: 14px;
-        }
-
-        .dc-slide-nav {
+        .dc-shot-arrows {
             display: flex;
             gap: 8px;
-            flex-shrink: 0;
+            flex: 0 0 auto;
         }
 
-        .dc-slide-nav a {
+        .dc-shot-arrow {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border: 1px solid #cbd8e3;
             border-radius: 10px;
             background: #fff;
             color: #086959;
-            text-decoration: none;
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 700;
-        }
-
-        .dc-slide-nav a:hover {
-            background: #e9f5f1;
+            cursor: pointer;
+            user-select: none;
         }
 
         @media (max-width: 720px) {
-            .dc-slide-copy {
-                display: block;
-            }
-
-            .dc-slide-nav {
-                margin-top: 14px;
-            }
-        }
-    </style>
-
-
-    <style>
-        .dc-hero {
-            position: relative;
-            overflow: hidden;
-            border-radius: 26px;
-            padding: clamp(22px, 4vw, 42px);
-            color: #fff;
-            background: radial-gradient(circle at 85% 10%, rgba(140, 230, 212, .14), transparent 28%),
-            radial-gradient(circle at 15% 90%, rgba(93, 66, 150, .28), transparent 34%),
-            linear-gradient(135deg, #101d34 0%, #172844 58%, #112037 100%);
-            box-shadow: 0 18px 42px rgba(17, 30, 53, .18);
-            border: 1px solid rgba(255, 255, 255, .06);
-        }
-
-        .dc-hero::before {
-            content: "";
-            position: absolute;
-            width: 360px;
-            height: 360px;
-            right: -120px;
-            top: -160px;
-            border-radius: 50%;
-            background: rgba(140, 230, 212, .06);
-            pointer-events: none;
-        }
-
-        .dc-brand-row {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 24px;
-        }
-
-        .dc-brand-row img {
-            width: 46px;
-            height: 46px;
-            object-fit: cover;
-            border-radius: 13px;
-            background: #fff;
-            padding: 3px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, .15);
-        }
-
-        .dc-brand-name {
-            font-size: 14px;
-            font-weight: 800;
-            letter-spacing: 2px;
-        }
-
-        .dc-pill {
-            display: inline-flex;
-            align-items: center;
-            min-height: 30px;
-            padding: 5px 13px;
-            border-radius: 999px;
-            font-size: 12px;
-            line-height: 1;
-            font-weight: 700;
-        }
-
-        .dc-pill-version {
-            border: 1px solid #526078;
-            color: #dbe4f3;
-            background: rgba(255, 255, 255, .02);
-        }
-
-        .dc-pill-pro {
-            color: #9bf3d7;
-            background: #164c4b;
-        }
-
-        .dc-banner-card {
-            position: relative;
-            z-index: 2;
-            overflow: hidden;
-            border-radius: 20px;
-            padding: 8px;
-            background: rgba(255, 255, 255, .07);
-            border: 1px solid rgba(255, 255, 255, .12);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, .18);
-            backdrop-filter: blur(6px);
-        }
-
-        .dc-banner-card img {
-            display: block;
-            width: 100%;
-            height: auto;
-            border-radius: 14px;
-            background: #fff;
-        }
-
-        .dc-banner-caption {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            justify-content: space-between;
-            gap: 18px;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 18px;
-            color: #c8d5e8;
-            font-size: 13px;
-        }
-
-        .dc-banner-caption strong {
-            color: #fff;
-        }
-
-        .dc-banner-badges {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .dc-banner-badges span {
-            padding: 7px 11px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, .07);
-            border: 1px solid rgba(255, 255, 255, .1);
-            color: #dbe7f7;
-            font-size: 12px;
-        }
-
-        @media (max-width: 720px) {
-            .dc-hero {
-                padding: 20px;
-                border-radius: 20px;
-            }
-
-            .dc-banner-card {
-                border-radius: 15px;
-                padding: 5px;
-            }
-
-            .dc-banner-card img {
-                border-radius: 11px;
+            .dc-shot-tab {
+                padding: 8px 11px;
+                font-size: 12px;
             }
         }
     </style>
 
 </head>
-<body style="margin:0;background:linear-gradient(180deg,#f7f9fc 0%,#f1f4f9 100%);color:#18243b;font-family:Arial,Helvetica,sans-serif;line-height:1.65;">
-<main style="max-width:1180px;margin:0 auto;padding:28px 18px 48px;">
-    <section style="background:#111e35;border-radius:24px;padding:clamp(24px,5vw,56px);color:#fff;">
-        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:36px;">
-            <img src="icon.png" alt="Single Session Login" width="44" height="44"
-                 style="border-radius:12px;background:#fff;">
-            <span style="font-size:14px;font-weight:700;letter-spacing:2px;">DEECODERS</span>
-            <span style="display:inline-block;border:1px solid #526078;border-radius:30px;padding:5px 13px;font-size:12px;color:#dbe4f3;">ODOO 19</span>
-            <span style="display:inline-block;background:#164c4b;border-radius:30px;padding:5px 13px;font-size:12px;color:#9bf3d7;">PRO EDITION</span>
+
+<body style="margin:0;background:#f4f6fa;color:#18243b;font-family:Arial,Helvetica,sans-serif;line-height:1.65;overflow-x:hidden;">
+<main style="width:100%;max-width:1180px;margin:0 auto;padding:24px 16px 40px;box-sizing:border-box;overflow:hidden;">
+
+    <section style="
+        position:relative;
+        overflow:hidden;
+        width:100%;
+        max-width:100%;
+        box-sizing:border-box;
+        border-radius:24px;
+        padding:clamp(20px,3vw,34px);
+        color:#fff;
+        background:linear-gradient(135deg,#101d34 0%,#172844 58%,#112037 100%);
+        box-shadow:0 14px 34px rgba(17,30,53,.14);
+        border:1px solid rgba(255,255,255,.06);
+    ">
+        <div style="
+            display:flex;
+            align-items:center;
+            gap:12px;
+            flex-wrap:wrap;
+            margin-bottom:22px;
+            width:100%;
+            max-width:100%;
+            box-sizing:border-box;
+        ">
+            <img src="icon.png"
+                 alt="Single Session Login Pro icon"
+                 width="46"
+                 height="46"
+                 style="
+                    display:block;
+                    width:46px;
+                    height:46px;
+                    max-width:46px;
+                    object-fit:cover;
+                    border-radius:13px;
+                    background:#fff;
+                    padding:3px;
+                    box-sizing:border-box;
+                 ">
+            <span style="font-size:14px;font-weight:800;letter-spacing:2px;">DEECODERS</span>
+            <span style="display:inline-block;padding:6px 13px;border:1px solid #526078;border-radius:999px;color:#dbe4f3;font-size:12px;font-weight:700;line-height:1.2;">ODOO 19</span>
+            <span style="display:inline-block;padding:6px 13px;border-radius:999px;color:#9bf3d7;background:#164c4b;font-size:12px;font-weight:700;line-height:1.2;">PRO EDITION</span>
         </div>
 
-        <div class="dc-banner-card">
+        <div style="
+            width:100%;
+            max-width:100%;
+            overflow:hidden;
+            box-sizing:border-box;
+            border-radius:18px;
+            padding:7px;
+            background:rgba(255,255,255,.07);
+            border:1px solid rgba(255,255,255,.12);
+        ">
             <img src="banner.png"
                  alt="Single Session Login Pro promotional banner for Odoo 19"
-                 loading="eager">
+                 loading="eager"
+                 style="
+                    display:block;
+                    width:100%;
+                    max-width:100%;
+                    height:auto;
+                    object-fit:contain;
+                    border-radius:13px;
+                    background:#fff;
+                    margin:0;
+                 ">
         </div>
-        <div class="dc-banner-caption">
-            <div><strong>Single Session Login Pro</strong> · Advanced session security and administration for Odoo 19
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:14px;
+            flex-wrap:wrap;
+            width:100%;
+            max-width:100%;
+            box-sizing:border-box;
+            margin-top:16px;
+            color:#c8d5e8;
+            font-size:13px;
+        ">
+            <div style="min-width:0;flex:1 1 420px;">
+                <strong style="color:#fff;">Single Session Login Pro</strong>
+                <span> · Advanced session security and administration for Odoo 19</span>
             </div>
-            <div class="dc-banner-badges">
-                <span>Login Policy</span>
-                <span>Idle Auto-Logout</span>
-                <span>Active Sessions</span>
-                <span>Session History</span>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;flex:1 1 420px;justify-content:flex-end;">
+                <span style="padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);color:#dbe7f7;font-size:12px;">Login Policy</span>
+                <span style="padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);color:#dbe7f7;font-size:12px;">Idle Auto-Logout</span>
+                <span style="padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);color:#dbe7f7;font-size:12px;">Active Sessions</span>
+                <span style="padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);color:#dbe7f7;font-size:12px;">Session History</span>
             </div>
         </div>
     </section>
 
-    <section aria-label="Pro benefits" style="display:flex;gap:16px;flex-wrap:wrap;margin:20px 0 56px;">
+
+    <section aria-label="Pro benefits"
+             style="display:flex;gap:16px;flex-wrap:wrap;width:100%;max-width:100%;box-sizing:border-box;margin:20px 0 56px;">
         <div style="flex:1 1 240px;background:#fff;border:1px solid #e0e5ee;border-radius:14px;padding:22px;">
             <strong style="font-size:15px;">Choose your login policy</strong>
             <p style="font-size:14px;color:#637087;margin:6px 0 0;">Replace the old session or protect it by rejecting a
@@ -496,91 +367,114 @@
         </div>
     </section>
 
-    <section aria-labelledby="pro-screenshots-title" style="margin-bottom:56px;">
-        <p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#087f74;margin:0 0 8px;">A CLOSER LOOK</p>
+
+    <section aria-labelledby="pro-screenshots-title"
+             style="width:100%;max-width:100%;box-sizing:border-box;margin:0 0 56px;overflow:hidden;">
+
+        <p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#087f74;margin:0 0 8px;">
+            A CLOSER LOOK
+        </p>
+
         <h2 id="pro-screenshots-title"
-            style="font-size:clamp(26px,4vw,36px);line-height:1.2;letter-spacing:-1px;margin:0 0 12px;">
+            style="font-size:clamp(26px,4vw,36px);line-height:1.2;letter-spacing:-1px;margin:0 0 12px;color:#18243b;">
             Explore Pro in action.
         </h2>
-        <p style="color:#637087;max-width:760px;margin:0 0 20px;">
-            Review the main Pro workflows below. Use the tabs, arrows, thumbnails, or simply swipe on mobile.
+
+        <p style="color:#637087;max-width:760px;margin:0 0 20px;font-size:14px;">
+            Review the main Pro workflows below. Use the buttons to switch screenshots.
         </p>
 
-        <nav class="dc-shot-tabs" aria-label="Choose a screenshot">
-            <a href="#pro-shot-settings">01 · Configuration</a>
-            <a href="#pro-shot-active">02 · Active Sessions</a>
-            <a href="#pro-shot-history">03 · Session History</a>
-        </nav>
+        <!--
+            Pure CSS controls.
+            No href, no JavaScript, no Bootstrap carousel API.
+            This works inside Odoo Module Info where script-driven controls may not run.
+        -->
+        <input type="radio" name="dc-pro-shots" id="dc-shot-1" checked>
+        <input type="radio" name="dc-pro-shots" id="dc-shot-2">
+        <input type="radio" name="dc-pro-shots" id="dc-shot-3">
 
-        <div class="dc-carousel" role="region" aria-roledescription="carousel"
-             aria-label="Single Session Login Pro screenshots" tabindex="0">
+        <div class="dc-shot-viewport">
+            <div class="dc-shot-track">
 
-            <figure id="pro-shot-settings" class="dc-slide"
-                    role="group" aria-roledescription="slide" aria-label="1 of 3: Configuration">
-                <div class="dc-shot-frame">
-                    <img src="screenshot-settings.png"
-                         alt="Session Control configuration showing login conflict policy, idle auto-logout, timeout warning and history retention"
-                         loading="lazy">
-                </div>
-                <figcaption class="dc-slide-copy">
-                    <div>
-                        <h3>Session Control Configuration</h3>
-                        <p>Configure the login conflict policy, idle timeout, logout warning and session-history
-                            retention from one place.</p>
+                <figure class="dc-shot-panel" style="margin:0;padding:clamp(12px,2vw,22px);">
+                    <div style="width:100%;max-width:100%;overflow:hidden;box-sizing:border-box;padding:6px;border:1px solid #e2e8f0;border-radius:14px;background:#f7f9fc;">
+                        <img src="screenshot-settings.png"
+                             alt="Session Control configuration showing login conflict policy, idle auto-logout, timeout warning and history retention"
+                             loading="lazy"
+                             style="display:block;width:100%;max-width:100%;height:auto;object-fit:contain;margin:0;border-radius:9px;background:#fff;">
                     </div>
-                    <div class="dc-slide-nav" aria-label="Screenshot navigation">
-                        <a href="#pro-shot-history" aria-label="Previous: Session History">←</a>
-                        <a href="#pro-shot-active" aria-label="Next: Active Sessions">→</a>
-                    </div>
-                </figcaption>
-            </figure>
 
-            <figure id="pro-shot-active" class="dc-slide"
-                    role="group" aria-roledescription="slide" aria-label="2 of 3: Active Sessions">
-                <div class="dc-shot-frame">
-                    <img src="screenshot-active-sessions.png"
-                         alt="Active Sessions dashboard showing user, login datetime, last activity, browser, IP address and status"
-                         loading="lazy">
-                </div>
-                <figcaption class="dc-slide-copy">
-                    <div>
-                        <h3>Active Sessions</h3>
-                        <p>See currently logged-in users with login time, last activity, browser, IP address and live
-                            session status.</p>
-                    </div>
-                    <div class="dc-slide-nav" aria-label="Screenshot navigation">
-                        <a href="#pro-shot-settings" aria-label="Previous: Configuration">←</a>
-                        <a href="#pro-shot-history" aria-label="Next: Session History">→</a>
-                    </div>
-                </figcaption>
-            </figure>
+                    <figcaption
+                            style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-top:14px;">
+                        <div style="min-width:0;flex:1 1 520px;">
+                            <strong style="display:block;font-size:18px;line-height:1.35;color:#18243b;margin-bottom:4px;">
+                                Session Control Configuration
+                            </strong>
+                            <span style="display:block;color:#637087;font-size:14px;line-height:1.55;">
+                                Configure login conflict policy, idle timeout, logout warning and session-history retention from one place.
+                            </span>
+                        </div>
+                        <div class="dc-shot-arrows">
+                            <label class="dc-shot-arrow" for="dc-shot-3" aria-label="Previous screenshot">←</label>
+                            <label class="dc-shot-arrow" for="dc-shot-2" aria-label="Next screenshot">→</label>
+                        </div>
+                    </figcaption>
+                </figure>
 
-            <figure id="pro-shot-history" class="dc-slide"
-                    role="group" aria-roledescription="slide" aria-label="3 of 3: Session History">
-                <div class="dc-shot-frame">
-                    <img src="screenshot-session-history.png"
-                         alt="Session History showing login time, end time, duration, status, end reason and IP address"
-                         loading="lazy">
-                </div>
-                <figcaption class="dc-slide-copy">
-                    <div>
-                        <h3>Session History</h3>
-                        <p>Track completed sessions with login time, end time, duration, status and clear end reasons
-                            such as Idle Timeout or Replaced by New Login.</p>
+                <figure class="dc-shot-panel" style="margin:0;padding:clamp(12px,2vw,22px);">
+                    <div style="width:100%;max-width:100%;overflow:hidden;box-sizing:border-box;padding:6px;border:1px solid #e2e8f0;border-radius:14px;background:#f7f9fc;">
+                        <img src="screenshot-active-sessions.png"
+                             alt="Active Sessions dashboard showing user, login datetime, last activity, browser, IP address and status"
+                             loading="lazy"
+                             style="display:block;width:100%;max-width:100%;height:auto;object-fit:contain;margin:0;border-radius:9px;background:#fff;">
                     </div>
-                    <div class="dc-slide-nav" aria-label="Screenshot navigation">
-                        <a href="#pro-shot-active" aria-label="Previous: Active Sessions">←</a>
-                        <a href="#pro-shot-settings" aria-label="Next: Configuration">→</a>
+
+                    <figcaption
+                            style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-top:14px;">
+                        <div style="min-width:0;flex:1 1 520px;">
+                            <strong style="display:block;font-size:18px;line-height:1.35;color:#18243b;margin-bottom:4px;">
+                                Active Sessions
+                            </strong>
+                            <span style="display:block;color:#637087;font-size:14px;line-height:1.55;">
+                                See currently logged-in users with login time, last activity, browser, IP address and live session status.
+                            </span>
+                        </div>
+                        <div class="dc-shot-arrows">
+                            <label class="dc-shot-arrow" for="dc-shot-1" aria-label="Previous screenshot">←</label>
+                            <label class="dc-shot-arrow" for="dc-shot-3" aria-label="Next screenshot">→</label>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <figure class="dc-shot-panel" style="margin:0;padding:clamp(12px,2vw,22px);">
+                    <div style="width:100%;max-width:100%;overflow:hidden;box-sizing:border-box;padding:6px;border:1px solid #e2e8f0;border-radius:14px;background:#f7f9fc;">
+                        <img src="screenshot-session-history.png"
+                             alt="Session History showing login time, end time, duration, status, end reason and IP address"
+                             loading="lazy"
+                             style="display:block;width:100%;max-width:100%;height:auto;object-fit:contain;margin:0;border-radius:9px;background:#fff;">
                     </div>
-                </figcaption>
-            </figure>
+
+                    <figcaption
+                            style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-top:14px;">
+                        <div style="min-width:0;flex:1 1 520px;">
+                            <strong style="display:block;font-size:18px;line-height:1.35;color:#18243b;margin-bottom:4px;">
+                                Session History
+                            </strong>
+                            <span style="display:block;color:#637087;font-size:14px;line-height:1.55;">
+                                Track completed sessions with login time, end time, duration, status and clear end reasons.
+                            </span>
+                        </div>
+                        <div class="dc-shot-arrows">
+                            <label class="dc-shot-arrow" for="dc-shot-2" aria-label="Previous screenshot">←</label>
+                            <label class="dc-shot-arrow" for="dc-shot-1" aria-label="Next screenshot">→</label>
+                        </div>
+                    </figcaption>
+                </figure>
+
+            </div>
         </div>
-
-        <p style="font-size:12px;color:#7b8798;margin:12px 2px 0;">
-            Keep <code>index.html</code> and all three screenshot PNG files inside the same
-            <code>static/description/</code> folder so these relative image paths resolve correctly.
-        </p>
     </section>
+
 
     <section
             style="background:#e9f5f1;border:1px solid #cde7de;border-radius:20px;padding:clamp(24px,4vw,40px);margin-bottom:48px;">
