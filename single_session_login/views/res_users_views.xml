@@ -8,7 +8,7 @@
         <field name="inherit_id" ref="base.view_users_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page string="Session Control">
+                <page name="single_session_control" string="Session Control" groups="base.group_system">
                     <group>
                         <field name="allow_multiple_sessions"/>
                     </group>

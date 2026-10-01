@@ -1,35 +1,31 @@
 import uuid
-import logging
-from odoo import models, fields, api, SUPERUSER_ID
-from odoo.http import request
 
-_logger = logging.getLogger(__name__)
+from odoo import fields, models
+from odoo.http import request
 
 
 class ResUsers(models.Model):
     _inherit = "res.users"
 
-    allow_multiple_sessions = fields.Boolean(string="Allow Multiple Sessions", dafault=False)
-    session_uuid = fields.Char(string="Session UUID",copy=False)
+    allow_multiple_sessions = fields.Boolean(
+        string="Allow Multiple Sessions", default=False, groups="base.group_system"
+    )
+    session_uuid = fields.Char(
+        string="Session UUID", copy=False, groups="base.group_system"
+    )
 
-    @classmethod
-    def authenticate(cls, db, credential, user_agent_env):
-        auth_info = super().authenticate(db,credential,user_agent_env)
+    def authenticate(self, credential, user_agent_env):
+        auth_info = super().authenticate(credential, user_agent_env)
         uid = auth_info.get("uid")
-        if uid:
+        # Non-interactive authentication must not evict a browser session.
+        if uid and request and user_agent_env and user_agent_env.get("interactive"):
+            user = self.sudo().browse(uid)
             new_uuid = str(uuid.uuid4())
-            with cls.pool.cursor() as cr:
-                env = api.Environment(cr,SUPERUSER_ID,{})
-                user = env["res.users"].browse(uid)
-
-                # Skip session control for exempted users
-                if not user.allow_multiple_sessions:
-                    user.write({"session_uuid": new_uuid})
-                cr.commit()
-
-            if request and request.session:
-                request.session.single_session_uuid = new_uuid
-
-            _logger.info("User %s logged in. UUID=%s",uid,new_uuid)
-
+            request.session["single_session_uuid"] = new_uuid
+            request.session.pop("single_session_pending_uid", None)
+            if auth_info.get("mfa") != "skip" and user._mfa_url():
+                # Password validation alone is not a completed MFA login.
+                request.session["single_session_pending_uid"] = uid
+            elif not user.allow_multiple_sessions:
+                user.session_uuid = new_uuid
         return auth_info

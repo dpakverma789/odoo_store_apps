@@ -1,25 +1,27 @@
 /** @odoo-module **/
 
 import { rpc } from "@web/core/network/rpc";
+import { registry } from "@web/core/registry";
 
-console.log("Single Session Checker Loaded");
-
-setInterval(async () => {
-    console.log("Checking session...");
-
-    try {
-
-        const result = await rpc("/single_session/check", {});
-        console.log("Session Check Response:", result);
-        
-        if (result && result.logout) {
-            console.warn("Session invalidated. Redirecting...");
-            window.location.replace("/web/login");
+registry.category("services").add("single_session_checker", {
+    start() {
+        async function checkSession() {
+            try {
+                const result = await rpc("/single_session/check", {}, { silent: true });
+                if (result?.logout) {
+                    window.location.replace("/web/login");
+                    return;
+                }
+            } catch (error) {
+                if (error.data?.name === "odoo.http.SessionExpiredException") {
+                    window.location.replace("/web/login");
+                    return;
+                }
+                // Retry temporary connection failures on the next check.
+            }
+            // Schedule after completion so slow requests never overlap.
+            window.setTimeout(checkSession, 5000);
         }
-
-    } catch (error) {
-
-        console.error("Single Session Error", error);
-    }
-
-}, 5000); // 5 seconds
+        checkSession();
+    },
+});
