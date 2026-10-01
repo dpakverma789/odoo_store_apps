@@ -2,3 +2,6 @@
 .venv
 odoo-developer.conf
 login_attempt_security
+__pycache__/
+*.py[cod]
+*.log
