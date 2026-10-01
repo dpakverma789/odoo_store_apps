@@ -26,6 +26,7 @@
                 <header>
                     <button name="action_end_session" type="object" string="End Session" class="oe_highlight"
                         groups="base.group_system" invisible="status != 'active'"
+                        confirm-title="End Session?" confirm-label="End Session"
                         confirm="Are you sure you want to end this user's active session?"/>
                     <field name="status" widget="statusbar"/>
                 </header>
@@ -33,7 +34,6 @@
                     <group><field name="user_id"/><field name="login_datetime"/><field name="last_activity_datetime"/>
                         <field name="end_datetime"/><field name="duration_minutes"/></group>
                     <group><field name="browser"/><field name="ip_address"/><field name="user_agent"/>
-                        <field name="session_reference" string="Safe Session Reference"/>
                         <field name="end_reason"/><field name="revoked_by"/></group>
                 </group></sheet>
             </form>

@@ -47,6 +47,20 @@ class TestSingleSession(HttpCase):
         self.check(first, logout=True)
         self.check(second)
 
+    def test_replaced_session_blocked_without_checker(self):
+        first = self.login()
+        self.login()
+        result = self.rpc(first, "/web/session/get_session_info")
+        self.assertEqual(result["error"]["data"]["name"], "odoo.http.SessionExpiredException")
+
+    def test_replaced_session_cannot_bootstrap_backend(self):
+        first = self.login()
+        self.login()
+        self.opener = first
+        response = first.get(self.base_url() + "/odoo", allow_redirects=False, timeout=20)
+        self.assertEqual(response.status_code, 303)
+        self.assertTrue(response.headers["Location"].startswith("/web/login"))
+
     def test_exempt_user_keeps_both_sessions(self):
         self.user.allow_multiple_sessions = True
         self.env.flush_all()
@@ -102,6 +116,13 @@ class TestSingleSession(HttpCase):
             page = browser.get(self.base_url() + "/web/login/totp", timeout=20)
             page.raise_for_status()
             csrf = html.fromstring(page.content).xpath('//input[@name="csrf_token"]/@value')[0]
+            invalid = browser.post(
+                self.base_url() + "/web/login/totp",
+                data={"csrf_token": csrf, "totp_token": "invalid"}, timeout=20,
+            )
+            self.assertEqual(invalid.status_code, 200)
+            self.user.invalidate_recordset(["session_uuid"])
+            self.assertEqual(self.user.session_uuid, "previous-session")
             response = browser.post(
                 self.base_url() + "/web/login/totp",
                 data={"csrf_token": csrf, "totp_token": TOTP(secret).generate().token},

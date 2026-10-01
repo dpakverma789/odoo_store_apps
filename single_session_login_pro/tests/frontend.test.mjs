@@ -33,8 +33,8 @@ function setup(responses = []) {
         },
     };
     vm.runInNewContext(source, context);
-    service.start({}, { dialog: { add: (component, props) => {
-        const entry = { props, closed: false };
+    service.start({}, { dialog: { add: (component, props, options = {}) => {
+        const entry = { props, options, closed: false };
         dialogs.push(entry);
         return () => { entry.closed = true; };
     } } });
@@ -91,6 +91,15 @@ test("failed Stay Logged In keeps warning open", async () => {
     await flush();
     assert.equal(await client.dialogs[0].props.confirm(), false);
     assert.equal(client.redirects.length, 0);
+});
+
+test("warning returns after Odoo closes dialogs during navigation", async () => {
+    const warning = { logout: false, warning: true, seconds_remaining: 60 };
+    const client = setup([warning, warning]);
+    await flush();
+    client.dialogs[0].options.onClose();
+    await client.tick();
+    assert.equal(client.dialogs.length, 2);
 });
 
 test("recent activity suppresses stale warning", async () => {

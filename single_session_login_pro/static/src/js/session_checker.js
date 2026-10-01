@@ -104,6 +104,10 @@ registry.category("services").add("single_session_checker", {
                         warningDismissed = true;
                         closeWarning = undefined;
                     },
+                }, {
+                    // Odoo can close dialogs while loading/navigating actions.
+                    // Do not retain a stale handle that suppresses all warnings.
+                    onClose: () => { closeWarning = undefined; },
                 });
             }
         }

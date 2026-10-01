@@ -6,12 +6,21 @@ from odoo.addons.web.controllers.home import Home
 
 def logout_message(reason):
     return {
-        "replaced_by_new_login": _("You were signed out because your account was logged in elsewhere. If this was not you, contact your administrator."),
+        "replaced_by_new_login": _("You were signed out because your account was logged in elsewhere."),
         "new_login_rejected": _("Your account already has an active session. Sign out from the other session first, or contact your administrator."),
         "idle_timeout": _("Your session expired due to inactivity. Please sign in again to continue."),
         "admin_revoked": _("Your session was terminated by an administrator. Please sign in again if you still require access."),
         "session_invalidated": _("Your session is no longer valid. Please sign in again."),
     }.get(reason)
+
+
+def logout_title(reason):
+    if not logout_message(reason):
+        return None
+    return {
+        "new_login_rejected": _("Login Not Allowed"),
+        "idle_timeout": _("Session Expired"),
+    }.get(reason, _("Session Ended"))
 
 
 class ProSessionCheck(SingleSessionCheck):
@@ -47,4 +56,5 @@ class ProHome(Home):
         if response.is_qweb:
             reason = kw.get("single_session_reason") or request.session.get("single_session_reason")
             response.qcontext["single_session_message"] = logout_message(reason)
+            response.qcontext["single_session_title"] = logout_title(reason)
         return response

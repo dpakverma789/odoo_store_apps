@@ -3,7 +3,8 @@
     <template id="login_reason" inherit_id="web.login" name="Session logout reason">
         <xpath expr="//form" position="inside">
             <div t-if="single_session_message" class="alert alert-info mt-3" role="status">
-                <t t-out="single_session_message"/>
+                <strong class="d-block" t-out="single_session_title"/>
+                <span t-out="single_session_message"/>
             </div>
         </xpath>
     </template>

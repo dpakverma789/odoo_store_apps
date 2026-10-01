@@ -156,7 +156,9 @@ class UserSession(models.Model):
         # before installation without a marker must sign in again.
         if pending != user.id and (not token or (not user.allow_multiple_sessions and user.session_uuid != token)):
             return
-        record = user._single_session_complete_login(token or str(uuid.uuid4()))
+        token = token or str(uuid.uuid4())
+        request.session["single_session_uuid"] = token
+        record = user._single_session_complete_login(token)
         request.session.pop("single_session_pending_uid", None)
         request.session["single_session_pro_registered"] = True
         return record
@@ -201,6 +203,7 @@ class UserSession(models.Model):
         days = self._settings()["retention"]
         if days:
             self.with_context(active_test=False).search([
+                ("active", "=", False),
                 ("status", "in", ["ended", "expired", "rejected"]),
                 ("end_datetime", "<", fields.Datetime.now() - timedelta(days=days)),
             ]).unlink()

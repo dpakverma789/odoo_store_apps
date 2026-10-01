@@ -6,7 +6,7 @@ Single Session Login allows administrators to restrict users to a single active 
 while providing the flexibility to allow multiple sessions for selected users.
 Improve security, prevent account sharing, and manage user access across devices.
 """,
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Administration",
     "license": "LGPL-3",
 

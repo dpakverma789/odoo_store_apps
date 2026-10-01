@@ -13,13 +13,14 @@
                         </setting>
                     </block>
                     <block title="Session Expiration">
-                        <setting string="Enable Idle Auto-Logout">
+                        <setting string="Enable Idle Auto-Logout" help="End inactive browser sessions on the server. Background session checks do not count as activity.">
                             <field name="session_idle_enabled"/>
                             <div class="content-group" invisible="not session_idle_enabled">
                                 <div class="mt16"><label for="session_idle_minutes"/>
                                     <field name="session_idle_minutes" class="oe_inline"/> minutes</div>
                                 <div class="mt16"><label for="session_warning_minutes"/>
                                     <field name="session_warning_minutes" class="oe_inline"/> minutes</div>
+                                <div class="text-muted">Use 0 to disable the warning. Otherwise, the warning must be shorter than the idle timeout.</div>
                             </div>
                         </setting>
                     </block>
