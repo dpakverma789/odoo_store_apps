@@ -4,9 +4,286 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Single Session Login Pro | Deecoders</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .dc-shot-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 0 0 18px;
+        }
+
+        .dc-shot-tabs a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            border: 1px solid #cbd8e3;
+            border-radius: 999px;
+            background: #fff;
+            color: #086959;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: .2s ease;
+        }
+
+        .dc-shot-tabs a:hover {
+            background: #e9f5f1;
+            border-color: #9ccfc0;
+        }
+
+        .dc-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            border: 1px solid #dce3ed;
+            border-radius: 20px;
+            background: #fff;
+            box-shadow: 0 12px 30px rgba(24, 36, 59, .08);
+            scrollbar-width: thin;
+            scrollbar-color: #a8b8ca #edf1f7;
+        }
+
+        .dc-slide {
+            flex: 0 0 100%;
+            min-width: 100%;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            margin: 0;
+            padding: clamp(16px, 3vw, 30px);
+        }
+
+        .dc-shot-frame {
+            background: #f7f9fc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .dc-shot-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 680px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        .dc-slide-copy {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .dc-slide-copy h3 {
+            margin: 0 0 5px;
+            font-size: 19px;
+            line-height: 1.3;
+            color: #18243b;
+        }
+
+        .dc-slide-copy p {
+            margin: 0;
+            max-width: 760px;
+            color: #637087;
+            font-size: 14px;
+        }
+
+        .dc-slide-nav {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .dc-slide-nav a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 42px;
+            height: 42px;
+            border: 1px solid #cbd8e3;
+            border-radius: 10px;
+            background: #fff;
+            color: #086959;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .dc-slide-nav a:hover {
+            background: #e9f5f1;
+        }
+
+        @media (max-width: 720px) {
+            .dc-slide-copy {
+                display: block;
+            }
+
+            .dc-slide-nav {
+                margin-top: 14px;
+            }
+        }
+    </style>
+
+
+    <style>
+        .dc-hero {
+            position: relative;
+            overflow: hidden;
+            border-radius: 26px;
+            padding: clamp(22px, 4vw, 42px);
+            color: #fff;
+            background: radial-gradient(circle at 85% 10%, rgba(140, 230, 212, .14), transparent 28%),
+            radial-gradient(circle at 15% 90%, rgba(93, 66, 150, .28), transparent 34%),
+            linear-gradient(135deg, #101d34 0%, #172844 58%, #112037 100%);
+            box-shadow: 0 18px 42px rgba(17, 30, 53, .18);
+            border: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        .dc-hero::before {
+            content: "";
+            position: absolute;
+            width: 360px;
+            height: 360px;
+            right: -120px;
+            top: -160px;
+            border-radius: 50%;
+            background: rgba(140, 230, 212, .06);
+            pointer-events: none;
+        }
+
+        .dc-brand-row {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .dc-brand-row img {
+            width: 46px;
+            height: 46px;
+            object-fit: cover;
+            border-radius: 13px;
+            background: #fff;
+            padding: 3px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .15);
+        }
+
+        .dc-brand-name {
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .dc-pill {
+            display: inline-flex;
+            align-items: center;
+            min-height: 30px;
+            padding: 5px 13px;
+            border-radius: 999px;
+            font-size: 12px;
+            line-height: 1;
+            font-weight: 700;
+        }
+
+        .dc-pill-version {
+            border: 1px solid #526078;
+            color: #dbe4f3;
+            background: rgba(255, 255, 255, .02);
+        }
+
+        .dc-pill-pro {
+            color: #9bf3d7;
+            background: #164c4b;
+        }
+
+        .dc-banner-card {
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            border-radius: 20px;
+            padding: 8px;
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .12);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, .18);
+            backdrop-filter: blur(6px);
+        }
+
+        .dc-banner-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+            background: #fff;
+        }
+
+        .dc-banner-caption {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 18px;
+            color: #c8d5e8;
+            font-size: 13px;
+        }
+
+        .dc-banner-caption strong {
+            color: #fff;
+        }
+
+        .dc-banner-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .dc-banner-badges span {
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .1);
+            color: #dbe7f7;
+            font-size: 12px;
+        }
+
+        @media (max-width: 720px) {
+            .dc-hero {
+                padding: 20px;
+                border-radius: 20px;
+            }
+
+            .dc-banner-card {
+                border-radius: 15px;
+                padding: 5px;
+            }
+
+            .dc-banner-card img {
+                border-radius: 11px;
+            }
+        }
+    </style>
+
 </head>
-<body style="margin:0;background:#f4f6fa;color:#18243b;font-family:Arial,Helvetica,sans-serif;line-height:1.65;">
-<main style="max-width:1120px;margin:0 auto;padding:24px 16px 40px;">
+<body style="margin:0;background:linear-gradient(180deg,#f7f9fc 0%,#f1f4f9 100%);color:#18243b;font-family:Arial,Helvetica,sans-serif;line-height:1.65;">
+<main style="max-width:1180px;margin:0 auto;padding:28px 18px 48px;">
     <section style="background:#111e35;border-radius:24px;padding:clamp(24px,5vw,56px);color:#fff;">
         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:36px;">
             <img src="icon.png" alt="Single Session Login" width="44" height="44"
@@ -15,33 +292,21 @@
             <span style="display:inline-block;border:1px solid #526078;border-radius:30px;padding:5px 13px;font-size:12px;color:#dbe4f3;">ODOO 19</span>
             <span style="display:inline-block;background:#164c4b;border-radius:30px;padding:5px 13px;font-size:12px;color:#9bf3d7;">PRO EDITION</span>
         </div>
-        <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;">
-            <div style="flex:1 1 500px;min-width:0;">
-                <p style="margin:0 0 12px;color:#8ce6d4;font-size:12px;letter-spacing:2px;font-weight:700;">SINGLE
-                    SESSION LOGIN PRO</p>
-                <h1 style="font-size:clamp(34px,5vw,56px);line-height:1.1;letter-spacing:-2px;margin:0 0 22px;color:#fff;">
-                    Take control of<br>every active session.</h1>
-                <p style="font-size:18px;line-height:1.7;color:#c7d2e3;max-width:620px;margin:0;">Go beyond
-                    latest-login-wins. Choose who stays signed in, close inactive sessions, and give administrators the
-                    visibility to act.</p>
-                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;">
-                    <span style="padding:7px 12px;background:#22314a;border-radius:8px;font-size:13px;">Flexible login policy</span>
-                    <span style="padding:7px 12px;background:#22314a;border-radius:8px;font-size:13px;">Idle auto-logout</span>
-                    <span style="padding:7px 12px;background:#22314a;border-radius:8px;font-size:13px;">Admin session control</span>
-                </div>
+
+        <div class="dc-banner-card">
+            <img src="banner.png"
+                 alt="Single Session Login Pro promotional banner for Odoo 19"
+                 loading="eager">
+        </div>
+        <div class="dc-banner-caption">
+            <div><strong>Single Session Login Pro</strong> · Advanced session security and administration for Odoo 19
             </div>
-            <aside aria-label="Pro price"
-                   style="flex:1 1 210px;max-width:300px;box-sizing:border-box;background:#1d2c45;border:1px solid #41516b;border-radius:20px;padding:28px;">
-                <p style="margin:0;color:#bfcde1;font-size:13px;font-weight:700;letter-spacing:1px;">UPGRADE TO PRO</p>
-                <p style="margin:10px 0 0;font-size:60px;line-height:1.2;font-weight:700;letter-spacing:-2px;color:#fff;">
-                    &euro;29</p>
-                <p style="margin:4px 0 20px;color:#aabbd3;font-size:13px;">Price in EUR</p>
-                <div style="height:1px;background:#41516b;margin-bottom:20px;"></div>
-                <p style="margin:0 0 8px;color:#f0f5fc;font-size:14px;">All Free capabilities<br>+ advanced session
-                    controls</p>
-                <p style="margin:12px 0 0;color:#aabbd3;font-size:12px;">Built as an extension of<br>Single Session
-                    Login Free.</p>
-            </aside>
+            <div class="dc-banner-badges">
+                <span>Login Policy</span>
+                <span>Idle Auto-Logout</span>
+                <span>Active Sessions</span>
+                <span>Session History</span>
+            </div>
         </div>
     </section>
 
@@ -234,88 +499,87 @@
     <section aria-labelledby="pro-screenshots-title" style="margin-bottom:56px;">
         <p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#087f74;margin:0 0 8px;">A CLOSER LOOK</p>
         <h2 id="pro-screenshots-title"
-            style="font-size:clamp(26px,4vw,36px);line-height:1.2;letter-spacing:-1px;margin:0 0 12px;">Explore Pro in
-            action.</h2>
-        <p style="color:#637087;margin:0 0 20px;">Product screenshots are coming soon. Browse the previews below using
-            the links or swipe between slides.</p>
-        <nav aria-label="Choose a screenshot" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;">
-            <a href="#pro-shot-settings"
-               style="padding:8px 14px;border:1px solid #cbd8e3;border-radius:24px;color:#086959;text-decoration:none;background:#fff;font-size:13px;">01
-                &middot; Configuration</a>
-            <a href="#pro-shot-active"
-               style="padding:8px 14px;border:1px solid #cbd8e3;border-radius:24px;color:#086959;text-decoration:none;background:#fff;font-size:13px;">02
-                &middot; Active Sessions</a>
-            <a href="#pro-shot-history"
-               style="padding:8px 14px;border:1px solid #cbd8e3;border-radius:24px;color:#086959;text-decoration:none;background:#fff;font-size:13px;">03
-                &middot; Session History</a>
+            style="font-size:clamp(26px,4vw,36px);line-height:1.2;letter-spacing:-1px;margin:0 0 12px;">
+            Explore Pro in action.
+        </h2>
+        <p style="color:#637087;max-width:760px;margin:0 0 20px;">
+            Review the main Pro workflows below. Use the tabs, arrows, thumbnails, or simply swipe on mobile.
+        </p>
+
+        <nav class="dc-shot-tabs" aria-label="Choose a screenshot">
+            <a href="#pro-shot-settings">01 · Configuration</a>
+            <a href="#pro-shot-active">02 · Active Sessions</a>
+            <a href="#pro-shot-history">03 · Session History</a>
         </nav>
-        <!-- No external JavaScript required. Replace each placeholder div with its commented img when screenshots are available. -->
-        <div role="region" aria-roledescription="carousel" aria-label="Pro screenshots" tabindex="0"
-             style="display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border:1px solid #dce3ed;border-radius:20px;background:#fff;">
-            <figure id="pro-shot-settings" role="group" aria-roledescription="slide" aria-label="1 of 3: Configuration"
-                    style="flex:0 0 100%;min-width:0;box-sizing:border-box;scroll-snap-align:start;margin:0;padding:clamp(18px,3vw,32px);">
-                <img src="screenshot-settings.png"
-                     alt="Session Control configuration with login policy, idle timeout and retention settings"
-                     style="display:block;width:100%;height:auto;border-radius:12px;">
-                <div style="min-height:240px;aspect-ratio:16/9;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:#edf3f8;border:2px dashed #bccddd;border-radius:12px;">
-                    <span style="font-size:12px;font-weight:700;letter-spacing:2px;color:#087f74;">SCREENSHOT 01</span>
-                    <strong style="font-size:clamp(22px,3vw,32px);margin:12px 0 6px;color:#18243b;">Session
-                        Configuration</strong>
-                    <span style="font-size:14px;color:#637087;">Screenshot coming soon</span>
+
+        <div class="dc-carousel" role="region" aria-roledescription="carousel"
+             aria-label="Single Session Login Pro screenshots" tabindex="0">
+
+            <figure id="pro-shot-settings" class="dc-slide"
+                    role="group" aria-roledescription="slide" aria-label="1 of 3: Configuration">
+                <div class="dc-shot-frame">
+                    <img src="screenshot-settings.png"
+                         alt="Session Control configuration showing login conflict policy, idle auto-logout, timeout warning and history retention"
+                         loading="lazy">
                 </div>
-                <figcaption style="margin-top:18px;"><strong style="font-size:18px;">Your session rules, in one
-                    place.</strong>
-                    <p style="color:#637087;font-size:14px;margin:6px 0 18px;">Configure the login conflict policy, idle
-                        timeout, warning and history retention.</p></figcaption>
-                <div style="display:flex;justify-content:space-between;gap:16px;font-size:14px;"><a
-                        href="#pro-shot-history" aria-label="Previous screenshot: Session History"
-                        style="color:#086959;">&larr; Previous</a><a href="#pro-shot-active"
-                                                                     aria-label="Next screenshot: Active Sessions"
-                                                                     style="color:#086959;">Next &rarr;</a></div>
+                <figcaption class="dc-slide-copy">
+                    <div>
+                        <h3>Session Control Configuration</h3>
+                        <p>Configure the login conflict policy, idle timeout, logout warning and session-history
+                            retention from one place.</p>
+                    </div>
+                    <div class="dc-slide-nav" aria-label="Screenshot navigation">
+                        <a href="#pro-shot-history" aria-label="Previous: Session History">←</a>
+                        <a href="#pro-shot-active" aria-label="Next: Active Sessions">→</a>
+                    </div>
+                </figcaption>
             </figure>
-            <figure id="pro-shot-active" role="group" aria-roledescription="slide" aria-label="2 of 3: Active Sessions"
-                    style="flex:0 0 100%;min-width:0;box-sizing:border-box;scroll-snap-align:start;margin:0;padding:clamp(18px,3vw,32px);">
-                <img src="screenshot-active-sessions.png"
-                     alt="Active Sessions dashboard showing users, login times, last activity, browsers and IP addresses"
-                     style="display:block;width:100%;height:auto;border-radius:12px;">
-                <div style="min-height:240px;aspect-ratio:16/9;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:#edf3f8;border:2px dashed #bccddd;border-radius:12px;">
-                    <span style="font-size:12px;font-weight:700;letter-spacing:2px;color:#087f74;">SCREENSHOT 02</span>
-                    <strong style="font-size:clamp(22px,3vw,32px);margin:12px 0 6px;color:#18243b;">Active
-                        Sessions</strong>
-                    <span style="font-size:14px;color:#637087;">Screenshot coming soon</span>
+
+            <figure id="pro-shot-active" class="dc-slide"
+                    role="group" aria-roledescription="slide" aria-label="2 of 3: Active Sessions">
+                <div class="dc-shot-frame">
+                    <img src="screenshot-active-sessions.png"
+                         alt="Active Sessions dashboard showing user, login datetime, last activity, browser, IP address and status"
+                         loading="lazy">
                 </div>
-                <figcaption style="margin-top:18px;"><strong style="font-size:18px;">Visibility for your
-                    administrators.</strong>
-                    <p style="color:#637087;font-size:14px;margin:6px 0 18px;">Review active users and session details,
-                        then open an individual session to end it when needed.</p></figcaption>
-                <div style="display:flex;justify-content:space-between;gap:16px;font-size:14px;"><a
-                        href="#pro-shot-settings" aria-label="Previous screenshot: Configuration"
-                        style="color:#086959;">&larr; Previous</a><a href="#pro-shot-history"
-                                                                     aria-label="Next screenshot: Session History"
-                                                                     style="color:#086959;">Next &rarr;</a></div>
+                <figcaption class="dc-slide-copy">
+                    <div>
+                        <h3>Active Sessions</h3>
+                        <p>See currently logged-in users with login time, last activity, browser, IP address and live
+                            session status.</p>
+                    </div>
+                    <div class="dc-slide-nav" aria-label="Screenshot navigation">
+                        <a href="#pro-shot-settings" aria-label="Previous: Configuration">←</a>
+                        <a href="#pro-shot-history" aria-label="Next: Session History">→</a>
+                    </div>
+                </figcaption>
             </figure>
-            <figure id="pro-shot-history" role="group" aria-roledescription="slide" aria-label="3 of 3: Session History"
-                    style="flex:0 0 100%;min-width:0;box-sizing:border-box;scroll-snap-align:start;margin:0;padding:clamp(18px,3vw,32px);">
-                <img src="screenshot-session-history.png"
-                     alt="Session History showing completed sessions, end times, statuses and end reasons"
-                     style="display:block;width:100%;height:auto;border-radius:12px;">
-                <div style="min-height:240px;aspect-ratio:16/9;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:#edf3f8;border:2px dashed #bccddd;border-radius:12px;">
-                    <span style="font-size:12px;font-weight:700;letter-spacing:2px;color:#087f74;">SCREENSHOT 03</span>
-                    <strong style="font-size:clamp(22px,3vw,32px);margin:12px 0 6px;color:#18243b;">Session
-                        History</strong>
-                    <span style="font-size:14px;color:#637087;">Screenshot coming soon</span>
+
+            <figure id="pro-shot-history" class="dc-slide"
+                    role="group" aria-roledescription="slide" aria-label="3 of 3: Session History">
+                <div class="dc-shot-frame">
+                    <img src="screenshot-session-history.png"
+                         alt="Session History showing login time, end time, duration, status, end reason and IP address"
+                         loading="lazy">
                 </div>
-                <figcaption style="margin-top:18px;"><strong style="font-size:18px;">Understand how sessions
-                    ended.</strong>
-                    <p style="color:#637087;font-size:14px;margin:6px 0 18px;">Review session times, end reasons and
-                        administrator revocation details.</p></figcaption>
-                <div style="display:flex;justify-content:space-between;gap:16px;font-size:14px;"><a
-                        href="#pro-shot-active" aria-label="Previous screenshot: Active Sessions"
-                        style="color:#086959;">&larr; Previous</a><a href="#pro-shot-settings"
-                                                                     aria-label="Next screenshot: Configuration"
-                                                                     style="color:#086959;">Next &rarr;</a></div>
+                <figcaption class="dc-slide-copy">
+                    <div>
+                        <h3>Session History</h3>
+                        <p>Track completed sessions with login time, end time, duration, status and clear end reasons
+                            such as Idle Timeout or Replaced by New Login.</p>
+                    </div>
+                    <div class="dc-slide-nav" aria-label="Screenshot navigation">
+                        <a href="#pro-shot-active" aria-label="Previous: Active Sessions">←</a>
+                        <a href="#pro-shot-settings" aria-label="Next: Configuration">→</a>
+                    </div>
+                </figcaption>
             </figure>
         </div>
+
+        <p style="font-size:12px;color:#7b8798;margin:12px 2px 0;">
+            Keep <code>index.html</code> and all three screenshot PNG files inside the same
+            <code>static/description/</code> folder so these relative image paths resolve correctly.
+        </p>
     </section>
 
     <section
